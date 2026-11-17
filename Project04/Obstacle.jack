@@ -9,7 +9,7 @@ class Obstacle {
     // Creates an obstacle and assigns its properties.
 
     constructor Obstacle new(int type, int initialLane, int initialColumn) {
-        let this = Memory.alloc(6);
+
         let obstacleType = type;
         let lane = initialLane;
         let column = initialColumn;
