@@ -1,0 +1,84 @@
+class ObstacleList {
+    field ObstacleNode head;
+    field int size;
+
+    // Creates an empty obstacle list.
+    constructor ObstacleList new() {
+        let head = null;
+        let size = 0;
+        return this;
+    }
+
+    // Adds an obstacle at the beginning of the list.
+    method void add(Obstacle newObstacle) {
+        var ObstacleNode newNode;
+        let newNode = ObstacleNode.new(newObstacle);
+        do newNode.setNext(head);
+        let head = newNode;
+        let size = size + 1;
+        return;
+    }
+
+    // Returns the first node.
+    method ObstacleNode getHead() {
+        return head;
+    }
+
+    // Returns the number of obstacles.
+    method int getSize() {
+        return size;
+    }
+
+    // Removes a node and releases its objects.
+    method void remove(ObstacleNode target) {
+        var ObstacleNode current, previous, nextNode;
+        var Obstacle tempObstacle;
+        let current = head;
+        let previous = null;
+
+        while (~(current = null)) {
+            if (current = target) {
+                let nextNode = current.getNext();
+                if (previous = null) {
+                    let head = nextNode;
+                } else {
+                    do previous.setNext(nextNode);
+                }
+                let tempObstacle = current.getObstacle();
+                do tempObstacle.dispose();
+                do current.dispose();
+                let size = size - 1;
+                return;
+            }
+            let previous = current;
+            let current = current.getNext();
+        }
+        return;
+    }
+
+    // Releases all nodes and their obstacles.
+    method void clear() {
+        var ObstacleNode current, nextNode;
+        var Obstacle tempObstacle;
+        let current = head;
+
+        while (~(current = null)) {
+            let nextNode = current.getNext();
+            let tempObstacle = current.getObstacle();
+            do tempObstacle.dispose();
+            do current.dispose();
+            let current = nextNode;
+        }
+
+        let head = null;
+        let size = 0;
+        return;
+    }
+
+    // Releases the entire list.
+    method void dispose() {
+        do clear();
+        do Memory.deAlloc(this);
+        return;
+    }
+}
