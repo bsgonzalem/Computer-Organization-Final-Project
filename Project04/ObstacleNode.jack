@@ -1,0 +1,33 @@
+class ObstacleNode {
+    field Obstacle obstacle;
+    field ObstacleNode next;
+
+    // Creates a node containing an obstacle.
+    constructor ObstacleNode new(Obstacle newObstacle) {
+        let obstacle = newObstacle;
+        let next = null;
+        return this;
+    }
+
+    // Returns the obstacle stored in this node.
+    method Obstacle getObstacle() {
+        return obstacle;
+    }
+
+    // Returns the next node.
+    method ObstacleNode getNext() {
+        return next;
+    }
+
+    // Sets the next node.
+    method void setNext(ObstacleNode nextNode) {
+        let next = nextNode;
+        return;
+    }
+
+    // Releases this node.
+    method void dispose() {
+        do Memory.deAlloc(this);
+        return;
+    }
+}
