@@ -1,0 +1,76 @@
+class Obstacle {
+    field int obstacleType;
+    field int lane;
+    field int column;
+    field int previousColumn;
+    field int length;
+    field int speed;
+
+    // Creates an obstacle and assigns its properties.
+
+    constructor Obstacle new(int type, int initialLane, int initialColumn) {
+        let this = Memory.alloc(6);
+        let obstacleType = type;
+        let lane = initialLane;
+        let column = initialColumn;
+        let previousColumn = initialColumn;
+
+        if (type = 1) {
+            let length = 3;
+        } else {
+            let length = 1;
+        }
+
+        if (type = 2) {
+            let speed = 2;
+        } else {
+            let speed = 1;
+        }
+
+        return this;
+    }
+
+    // Moves the obstacle and stores its previous column.
+    
+    method void move() {
+        let previousColumn = column;
+        let column = column - speed;
+        return;
+    }
+
+    // Returns the obstacle type.
+    method int getType() {
+        return obstacleType;
+    }
+
+    // Returns the obstacle lane.
+    method int getLane() {
+        return lane;
+    }
+
+    // Returns the current column.
+    method int getColumn() {
+        return column;
+    }
+
+    // Returns the previous column.
+    method int getPreviousColumn() {
+        return previousColumn;
+    }
+
+    // Returns the obstacle length.
+    method int getLength() {
+        return length;
+    }
+
+    // Returns the obstacle speed.
+    method int getSpeed() {
+        return speed;
+    }
+
+    // Releases the obstacle object.
+    method void dispose() {
+        do Memory.deAlloc(this);
+        return;
+    }
+}
