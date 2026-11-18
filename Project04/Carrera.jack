@@ -195,8 +195,22 @@ class Carrera {
 
     // Updates the internal pseudo-random generator.
     method int nextRandom() {
-        let randomState = (randomState * 5) + 3;
-        return randomState;
+    var int oldState;
+    let oldState = randomState;
+    let randomState = oldState + oldState + oldState + oldState + oldState + 3;
+    return randomState;
+
+    }   
+
+    // Returns the non-negative remainder of a value divided by a divisor.
+    method int positiveMod(int value, int divisor) {
+        while (value < 0) {
+            let value = value + divisor;
+        }
+        while (~(value < divisor)) {
+            let value = value - divisor;
+        }
+        return value;
     }
 
     // Checks whether a lane contains a lethal obstacle near the entrance.
