@@ -1,0 +1,15 @@
+// Grafico.vm - Rutinas graficas escritas a mano en lenguaje VM (seccion 9).
+// Autor 1:
+// Autor 2:
+// Autor 3:
+// No debe existir Grafico.jack. No se permite llamar a Memory.poke,
+// Memory.peek ni Math.multiply.
+
+// dibujarCelda(fila, col, sprite)
+//   argument 0 = fila (0..15), argument 1 = col (0..31),
+//   argument 2 = direccion del Array de 16 palabras del sprite.
+//   Linea k de la celda: RAM[16384 + fila*512 + k*32 + col] = sprite[k].
+function Grafico.dibujarCelda 0
+// COMPLETAR
+push constant 0
+return
