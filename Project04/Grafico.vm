@@ -1,15 +1,175 @@
-// Grafico.vm - Rutinas graficas escritas a mano en lenguaje VM (seccion 9).
-// Autor 1:
-// Autor 2:
-// Autor 3:
-// No debe existir Grafico.jack. No se permite llamar a Memory.poke,
-// Memory.peek ni Math.multiply.
+// Draws a 16x16 sprite at the specified screen cell.
+// argument 0 = row, argument 1 = column, argument 2 = sprite address.
+function Grafico.dibujarCelda 3
+push constant 16384
+push argument 1
+add
+pop local 0
+push constant 0
+pop local 1
+label DRAW_ROW_LOOP
+push local 1
+push argument 0
+lt
+if-goto DRAW_ROW_BODY
+goto DRAW_ROW_END
+label DRAW_ROW_BODY
+push local 0
+push constant 512
+add
+pop local 0
+push local 1
+push constant 1
+add
+pop local 1
+goto DRAW_ROW_LOOP
+label DRAW_ROW_END
+push constant 0
+pop local 1
+label DRAW_PIXEL_LOOP
+push local 1
+push constant 16
+lt
+if-goto DRAW_PIXEL_BODY
+goto DRAW_PIXEL_END
+label DRAW_PIXEL_BODY
+push argument 2
+push local 1
+add
+pop pointer 1
+push that 0
+pop local 2
+push local 0
+pop pointer 1
+push local 2
+pop that 0
+push local 0
+push constant 32
+add
+pop local 0
+push local 1
+push constant 1
+add
+pop local 1
+goto DRAW_PIXEL_LOOP
+label DRAW_PIXEL_END
+push constant 0
+return
 
-// dibujarCelda(fila, col, sprite)
-//   argument 0 = fila (0..15), argument 1 = col (0..31),
-//   argument 2 = direccion del Array de 16 palabras del sprite.
-//   Linea k de la celda: RAM[16384 + fila*512 + k*32 + col] = sprite[k].
-function Grafico.dibujarCelda 0
-// COMPLETAR
+// Clears a 16x16 screen cell.
+function Grafico.borrarCelda 2
+push constant 16384
+push argument 1
+add
+pop local 0
+push constant 0
+pop local 1
+label CLEAR_ROW_LOOP
+push local 1
+push argument 0
+lt
+if-goto CLEAR_ROW_BODY
+goto CLEAR_ROW_END
+label CLEAR_ROW_BODY
+push local 0
+push constant 512
+add
+pop local 0
+push local 1
+push constant 1
+add
+pop local 1
+goto CLEAR_ROW_LOOP
+label CLEAR_ROW_END
+push constant 0
+pop local 1
+label CLEAR_PIXEL_LOOP
+push local 1
+push constant 16
+lt
+if-goto CLEAR_PIXEL_BODY
+goto CLEAR_PIXEL_END
+label CLEAR_PIXEL_BODY
+push local 0
+pop pointer 1
+push constant 0
+pop that 0
+push local 0
+push constant 32
+add
+pop local 0
+push local 1
+push constant 1
+add
+pop local 1
+goto CLEAR_PIXEL_LOOP
+label CLEAR_PIXEL_END
+push constant 0
+return
+
+// Shifts all 16 scanlines of a cell row one pixel to the left.
+// The leftmost pixel wraps around to the rightmost position.
+function Grafico.desplazarFila 5
+push constant 16384
+pop local 0
+push constant 0
+pop local 1
+label SHIFT_ROW_LOOP
+push local 1
+push argument 0
+push constant 16
+lt
+if-goto SHIFT_ROW_BODY
+goto SHIFT_ROW_END
+label SHIFT_ROW_BODY
+push local 0
+pop pointer 1
+push that 0
+pop local 3
+push constant 0
+pop local 2
+label SHIFT_COL_LOOP
+push local 2
+push constant 31
+lt
+if-goto SHIFT_COL_BODY
+goto SHIFT_COL_END
+label SHIFT_COL_BODY
+push local 0
+push local 2
+push constant 1
+add
+add
+pop pointer 1
+push that 0
+pop local 4
+push local 0
+push local 2
+add
+pop pointer 1
+push local 4
+pop that 0
+push local 2
+push constant 1
+add
+pop local 2
+goto SHIFT_COL_LOOP
+label SHIFT_COL_END
+push local 0
+push constant 31
+add
+pop pointer 1
+push local 3
+pop that 0
+push local 0
+push constant 32
+add
+pop local 0
+push local 1
+push constant 1
+add
+pop local 1
+goto SHIFT_ROW_LOOP
+label SHIFT_ROW_END
 push constant 0
 return

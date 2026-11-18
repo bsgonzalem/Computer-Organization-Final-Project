@@ -1,0 +1,25 @@
+// File: Aleatorio.vm
+// Description: Deterministic pseudo-random number generator.
+// Autor: Brayan
+
+function Aleatorio.semilla 0
+push argument 0
+pop static 0
+push constant 0
+return
+
+function Aleatorio.siguiente 0
+push static 0
+push static 0
+add
+push static 0
+add
+push static 0
+add
+push static 0
+add
+push constant 3
+add
+pop static 0
+push static 0
+return
