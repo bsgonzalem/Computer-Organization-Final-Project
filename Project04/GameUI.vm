@@ -1,5 +1,5 @@
 function GameUI.new 0
-push constant 11
+push constant 12
 call Memory.alloc 1
 pop pointer 0
 push constant 16
@@ -28,6 +28,8 @@ not
 pop this 9
 push constant 0
 pop this 10
+push constant 0
+pop this 11
 push pointer 0
 call GameUI.createSprites 1
 pop temp 0
@@ -856,6 +858,44 @@ push constant 83
 call String.appendChar 2
 call Output.printString 1
 pop temp 0
+push constant 17
+push constant 8
+call Output.moveCursor 2
+pop temp 0
+push constant 15
+call String.new 1
+push constant 69
+call String.appendChar 2
+push constant 83
+call String.appendChar 2
+push constant 67
+call String.appendChar 2
+push constant 32
+call String.appendChar 2
+push constant 45
+call String.appendChar 2
+push constant 32
+call String.appendChar 2
+push constant 69
+call String.appendChar 2
+push constant 88
+call String.appendChar 2
+push constant 73
+call String.appendChar 2
+push constant 84
+call String.appendChar 2
+push constant 32
+call String.appendChar 2
+push constant 71
+call String.appendChar 2
+push constant 65
+call String.appendChar 2
+push constant 77
+call String.appendChar 2
+push constant 69
+call String.appendChar 2
+call Output.printString 1
+pop temp 0
 push constant 0
 pop local 0
 label WHILE_EXP0
@@ -868,6 +908,10 @@ eq
 or
 push local 0
 push constant 51
+eq
+or
+push local 0
+push constant 140
 eq
 or
 not
@@ -907,6 +951,15 @@ label IF_TRUE2
 push constant 300
 pop this 6
 label IF_FALSE2
+push local 0
+push constant 140
+eq
+if-goto IF_TRUE3
+goto IF_FALSE3
+label IF_TRUE3
+push constant 0
+pop this 9
+label IF_FALSE3
 push pointer 0
 call GameUI.waitForRelease 1
 pop temp 0
@@ -927,6 +980,26 @@ call Sys.wait 1
 pop temp 0
 goto WHILE_EXP0
 label WHILE_END0
+push constant 0
+return
+function GameUI.waitForEscape 0
+push argument 0
+pop pointer 0
+label WHILE_EXP0
+call Keyboard.keyPressed 0
+push constant 140
+eq
+not
+not
+if-goto WHILE_END0
+push constant 30
+call Sys.wait 1
+pop temp 0
+goto WHILE_EXP0
+label WHILE_END0
+push pointer 0
+call GameUI.waitForRelease 1
+pop temp 0
 push constant 0
 return
 function GameUI.drawRoad 0
@@ -1234,19 +1307,19 @@ if-goto IF_TRUE0
 goto IF_FALSE0
 label IF_TRUE0
 push constant 0
-pop this 10
+pop this 11
 push constant 0
 return
 label IF_FALSE0
 push local 0
-push this 10
+push this 11
 eq
 not
 if-goto IF_TRUE1
 goto IF_FALSE1
 label IF_TRUE1
 push local 0
-pop this 10
+pop this 11
 push local 0
 push constant 131
 eq
@@ -1305,7 +1378,8 @@ if-goto IF_TRUE6
 goto IF_FALSE6
 label IF_TRUE6
 push constant 0
-pop this 9
+not
+pop this 10
 label IF_FALSE6
 label IF_FALSE1
 push constant 0
@@ -1429,7 +1503,7 @@ push constant 12
 push constant 9
 call Output.moveCursor 2
 pop temp 0
-push constant 17
+push constant 19
 call String.new 1
 push constant 80
 call String.appendChar 2
@@ -1457,13 +1531,17 @@ push constant 79
 call String.appendChar 2
 push constant 32
 call String.appendChar 2
+push constant 82
+call String.appendChar 2
 push constant 69
 call String.appendChar 2
-push constant 88
-call String.appendChar 2
-push constant 73
-call String.appendChar 2
 push constant 84
+call String.appendChar 2
+push constant 85
+call String.appendChar 2
+push constant 82
+call String.appendChar 2
+push constant 78
 call String.appendChar 2
 call Output.printString 1
 pop temp 0
@@ -1472,34 +1550,48 @@ return
 function GameUI.run 0
 push argument 0
 pop pointer 0
+label WHILE_EXP0
+push this 9
+not
+if-goto WHILE_END0
+push constant 0
+pop this 10
+push constant 0
+pop this 8
+push constant 0
+pop this 7
 push pointer 0
 call GameUI.showMenu 1
 pop temp 0
+push this 9
+if-goto IF_TRUE0
+goto IF_FALSE0
+label IF_TRUE0
 push this 6
 push constant 1
 call Carrera.new 2
 pop this 0
-push constant 0
-pop this 7
-label WHILE_EXP0
-push this 9
+label WHILE_EXP1
 push this 0
 call Carrera.estado 1
 push constant 0
 eq
+push this 10
+not
 and
 not
-if-goto WHILE_END0
+if-goto WHILE_END1
 push pointer 0
 call GameUI.processInput 1
 pop temp 0
 push this 8
 not
-push this 9
+push this 10
+not
 and
-if-goto IF_TRUE0
-goto IF_FALSE0
-label IF_TRUE0
+if-goto IF_TRUE1
+goto IF_FALSE1
+label IF_TRUE1
 push this 7
 push constant 1
 add
@@ -1507,50 +1599,58 @@ pop this 7
 push this 7
 push constant 5
 eq
-if-goto IF_TRUE1
-goto IF_FALSE1
-label IF_TRUE1
+if-goto IF_TRUE2
+goto IF_FALSE2
+label IF_TRUE2
 push this 0
 call Carrera.generar 1
 pop temp 0
 push constant 0
 pop this 7
-label IF_FALSE1
+label IF_FALSE2
 push this 0
 call Carrera.avanzar 1
 pop temp 0
-label IF_FALSE0
+label IF_FALSE1
+push this 10
+not
+if-goto IF_TRUE3
+goto IF_FALSE3
+label IF_TRUE3
 push pointer 0
 call GameUI.draw 1
 pop temp 0
+label IF_FALSE3
 push constant 100
-call Sys.wait 1
-pop temp 0
-goto WHILE_EXP0
-label WHILE_END0
-push this 9
-if-goto IF_TRUE2
-goto IF_FALSE2
-label IF_TRUE2
-push pointer 0
-call GameUI.showResult 1
-pop temp 0
-push pointer 0
-call GameUI.waitForRelease 1
-pop temp 0
-label WHILE_EXP1
-call Keyboard.keyPressed 0
-push constant 140
-eq
-not
-not
-if-goto WHILE_END1
-push constant 30
 call Sys.wait 1
 pop temp 0
 goto WHILE_EXP1
 label WHILE_END1
-label IF_FALSE2
+push this 10
+not
+if-goto IF_TRUE4
+goto IF_FALSE4
+label IF_TRUE4
+push pointer 0
+call GameUI.showResult 1
+pop temp 0
+push pointer 0
+call GameUI.waitForEscape 1
+pop temp 0
+goto IF_END4
+label IF_FALSE4
+push pointer 0
+call GameUI.waitForRelease 1
+pop temp 0
+label IF_END4
+push this 0
+call Carrera.dispose 1
+pop temp 0
+push constant 0
+pop this 0
+label IF_FALSE0
+goto WHILE_EXP0
+label WHILE_END0
 push constant 0
 return
 function GameUI.dispose 0

@@ -9,6 +9,7 @@ class GameUI {
     field int spawnCounter;
     field boolean paused;
     field boolean running;
+    field boolean returnToMenu;
     field int lastKey;
 
     // Creates the interface and initializes its sprites.
@@ -22,6 +23,7 @@ class GameUI {
         let spawnCounter = 0;
         let paused = false;
         let running = true;
+        let returnToMenu = false;
         let lastKey = 0;
         do createSprites();
         return this;
@@ -146,7 +148,7 @@ class GameUI {
         return;
     }
 
-    // Shows the initial menu and selects the race distance.
+    // Shows the menu and selects the race distance.
     method void showMenu() {
         var int key;
         do Screen.clearScreen();
@@ -160,11 +162,16 @@ class GameUI {
         do Output.printString("2 - 200 STEPS");
         do Output.moveCursor(13, 8);
         do Output.printString("3 - 300 STEPS");
+        do Output.moveCursor(17, 8);
+        do Output.printString("ESC - EXIT GAME");
+
         let key = 0;
-        while (~((key = 49) | (key = 50) | (key = 51))) {
+        while (~((key = 49) | (key = 50) |
+                 (key = 51) | (key = 140))) {
             let key = Keyboard.keyPressed();
             do Sys.wait(30);
         }
+
         if (key = 49) {
             let targetSteps = 100;
         }
@@ -174,6 +181,10 @@ class GameUI {
         if (key = 51) {
             let targetSteps = 300;
         }
+        if (key = 140) {
+            let running = false;
+        }
+
         do waitForRelease();
         return;
     }
@@ -183,6 +194,15 @@ class GameUI {
         while (~(Keyboard.keyPressed() = 0)) {
             do Sys.wait(20);
         }
+        return;
+    }
+
+    // Waits until the escape key is pressed.
+    method void waitForEscape() {
+        while (~(Keyboard.keyPressed() = 140)) {
+            do Sys.wait(30);
+        }
+        do waitForRelease();
         return;
     }
 
@@ -301,7 +321,7 @@ class GameUI {
                 do restart();
             }
             if (key = 140) {
-                let running = false;
+                let returnToMenu = true;
             }
         }
         return;
@@ -331,40 +351,52 @@ class GameUI {
         do Output.printString("FINAL SCORE: ");
         do Output.printInt(race.puntaje());
         do Output.moveCursor(12, 9);
-        do Output.printString("PRESS ESC TO EXIT");
+        do Output.printString("PRESS ESC TO RETURN");
         return;
     }
 
-    // Runs the complete game loop.
+    // Runs the game and allows multiple races.
     method void run() {
-        do showMenu();
-        let race = Carrera.new(targetSteps, 1);
-        let spawnCounter = 0;
+        while (running) {
+            let returnToMenu = false;
+            let paused = false;
+            let spawnCounter = 0;
 
-        while (running & (race.estado() = 0)) {
-            do processInput();
+            do showMenu();
 
-            if (~paused & running) {
-                let spawnCounter = spawnCounter + 1;
+            if (running) {
+                let race = Carrera.new(targetSteps, 1);
 
-                if (spawnCounter = 5) {
-                    do race.generar();
-                    let spawnCounter = 0;
+                while ((race.estado() = 0) & (~returnToMenu)) {
+                    do processInput();
+
+                    if (~paused & (~returnToMenu)) {
+                        let spawnCounter = spawnCounter + 1;
+
+                        if (spawnCounter = 5) {
+                            do race.generar();
+                            let spawnCounter = 0;
+                        }
+
+                        do race.avanzar();
+                    }
+
+                    if (~returnToMenu) {
+                        do draw();
+                    }
+
+                    do Sys.wait(100);
                 }
 
-                do race.avanzar();
-            }
+                if (~returnToMenu) {
+                    do showResult();
+                    do waitForEscape();
+                } else {
+                    do waitForRelease();
+                }
 
-            do draw();
-            do Sys.wait(100);
-        }
-
-        if (running) {
-            do showResult();
-            do waitForRelease();
-
-            while (~(Keyboard.keyPressed() = 140)) {
-                do Sys.wait(30);
+                do race.dispose();
+                let race = null;
             }
         }
         return;
