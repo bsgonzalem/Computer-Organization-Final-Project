@@ -1,3 +1,9 @@
+/**
+ * File: ObstacleNode.jack
+ * Description: Represents a node in the obstacle list.
+ * Author: Brayan Santiago Gonzalez Mateus
+ */
+
 class ObstacleNode {
     field Obstacle obstacle;
     field ObstacleNode next;

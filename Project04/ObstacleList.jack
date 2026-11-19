@@ -1,3 +1,9 @@
+/**
+ * File: ObstacleList.jack
+ * Description: Manages the collection of active obstacles.
+ * Author: Brayan Santiago Gonzalez Mateus
+ */
+
 class ObstacleList {
     field ObstacleNode head;
     field int size;

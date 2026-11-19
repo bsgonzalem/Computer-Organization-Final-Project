@@ -1,3 +1,9 @@
+/**
+ * File: Main.jack
+ * Description: Run the project.
+ * Author: Brayan Santiago Gonzalez Mateus
+ */
+
 class Main {
 
     function void main() {
