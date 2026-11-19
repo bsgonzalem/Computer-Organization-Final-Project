@@ -1,5 +1,5 @@
 // File: Grafico.vm
-// Description: Implements low-level graphics routines for drawing game cells.
+// Description: Implements graphics routines for drawing game cells.
 // Author: Brayan Santiago Gonzalez Mateus
 
 // Draws a 16x16 sprite at the specified screen cell.
