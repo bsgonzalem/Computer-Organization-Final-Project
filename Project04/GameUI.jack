@@ -1,0 +1,386 @@
+class GameUI {
+    field Carrera race;
+    field Array carSprite;
+    field Array coneSprite;
+    field Array truckSprite;
+    field Array bikeSprite;
+    field Array coinSprite;
+    field int targetSteps;
+    field int spawnCounter;
+    field boolean paused;
+    field boolean running;
+    field int lastKey;
+
+    // Creates the interface and initializes its sprites.
+    constructor GameUI new() {
+        let carSprite = Array.new(16);
+        let coneSprite = Array.new(16);
+        let truckSprite = Array.new(16);
+        let bikeSprite = Array.new(16);
+        let coinSprite = Array.new(16);
+        let targetSteps = 100;
+        let spawnCounter = 0;
+        let paused = false;
+        let running = true;
+        let lastKey = 0;
+        do createSprites();
+        return this;
+    }
+
+    // Initializes all five sprites.
+    method void createSprites() {
+        do createCarSprite();
+        do createConeSprite();
+        do createTruckSprite();
+        do createBikeSprite();
+        do createCoinSprite();
+        return;
+    }
+
+    // Clears all rows of a sprite.
+    method void clearSprite(Array sprite) {
+        var int i;
+        let i = 0;
+        while (i < 16) {
+            let sprite[i] = 0;
+            let i = i + 1;
+        }
+        return;
+    }
+
+    // Creates the player's car sprite.
+    method void createCarSprite() {
+        do clearSprite(carSprite);
+        let carSprite[1] = 384;
+        let carSprite[2] = 960;
+        let carSprite[3] = 2016;
+        let carSprite[4] = 4080;
+        let carSprite[5] = 8184;
+        let carSprite[6] = 16380;
+        let carSprite[7] = 16380;
+        let carSprite[8] = 16380;
+        let carSprite[9] = 16380;
+        let carSprite[10] = 16380;
+        let carSprite[11] = 8184;
+        let carSprite[12] = 4080;
+        let carSprite[13] = 2016;
+        let carSprite[14] = 960;
+        return;
+    }
+
+    // Creates a triangular cone sprite.
+    method void createConeSprite() {
+        do clearSprite(coneSprite);
+        let coneSprite[2] = 256;
+        let coneSprite[3] = 768;
+        let coneSprite[4] = 768;
+        let coneSprite[5] = 1792;
+        let coneSprite[6] = 1792;
+        let coneSprite[7] = 3840;
+        let coneSprite[8] = 3840;
+        let coneSprite[9] = 7936;
+        let coneSprite[10] = 7936;
+        let coneSprite[11] = 16380;
+        let coneSprite[12] = 16380;
+        let coneSprite[13] = 32760;
+        let coneSprite[14] = 32760;
+        return;
+    }
+
+    // Creates a wide truck sprite.
+    method void createTruckSprite() {
+        do clearSprite(truckSprite);
+        let truckSprite[1] = 3840;
+        let truckSprite[2] = 8184;
+        let truckSprite[3] = 16380;
+        let truckSprite[4] = 16380;
+        let truckSprite[5] = 16380;
+        let truckSprite[6] = 16380;
+        let truckSprite[7] = 16380;
+        let truckSprite[8] = 16380;
+        let truckSprite[9] = 16380;
+        let truckSprite[10] = 16380;
+        let truckSprite[11] = 16380;
+        let truckSprite[12] = 16380;
+        let truckSprite[13] = 13884;
+        let truckSprite[14] = 13884;
+        return;
+    }
+
+    // Creates a narrow motorcycle sprite.
+    method void createBikeSprite() {
+        do clearSprite(bikeSprite);
+        let bikeSprite[1] = 384;
+        let bikeSprite[2] = 960;
+        let bikeSprite[3] = 384;
+        let bikeSprite[5] = 1536;
+        let bikeSprite[6] = 3072;
+        let bikeSprite[7] = 6144;
+        let bikeSprite[8] = 12288;
+        let bikeSprite[9] = 6144;
+        let bikeSprite[10] = 3072;
+        let bikeSprite[11] = 1536;
+        let bikeSprite[13] = 384;
+        let bikeSprite[14] = 960;
+        let bikeSprite[15] = 384;
+        return;
+    }
+
+    // Creates a circular coin sprite.
+    method void createCoinSprite() {
+        do clearSprite(coinSprite);
+        let coinSprite[1] = 384;
+        let coinSprite[2] = 960;
+        let coinSprite[3] = 1632;
+        let coinSprite[4] = 3120;
+        let coinSprite[5] = 6168;
+        let coinSprite[6] = 12300;
+        let coinSprite[7] = 12300;
+        let coinSprite[8] = 12300;
+        let coinSprite[9] = 12300;
+        let coinSprite[10] = 6168;
+        let coinSprite[11] = 3120;
+        let coinSprite[12] = 1632;
+        let coinSprite[13] = 960;
+        let coinSprite[14] = 384;
+        return;
+    }
+
+    // Shows the initial menu and selects the race distance.
+    method void showMenu() {
+        var int key;
+        do Screen.clearScreen();
+        do Output.moveCursor(3, 14);
+        do Output.printString("EAFIT RACING GAME");
+        do Output.moveCursor(6, 8);
+        do Output.printString("SELECT DISTANCE");
+        do Output.moveCursor(9, 8);
+        do Output.printString("1 - 100 STEPS");
+        do Output.moveCursor(11, 8);
+        do Output.printString("2 - 200 STEPS");
+        do Output.moveCursor(13, 8);
+        do Output.printString("3 - 300 STEPS");
+        let key = 0;
+        while (~((key = 49) | (key = 50) | (key = 51))) {
+            let key = Keyboard.keyPressed();
+            do Sys.wait(30);
+        }
+        if (key = 49) {
+            let targetSteps = 100;
+        }
+        if (key = 50) {
+            let targetSteps = 200;
+        }
+        if (key = 51) {
+            let targetSteps = 300;
+        }
+        do waitForRelease();
+        return;
+    }
+
+    // Waits until the current key is released.
+    method void waitForRelease() {
+        while (~(Keyboard.keyPressed() = 0)) {
+            do Sys.wait(20);
+        }
+        return;
+    }
+
+    // Draws the road and its three lanes.
+    method void drawRoad() {
+        do Screen.setColor(true);
+        do Screen.drawLine(0, 88, 511, 88);
+        do Screen.drawLine(0, 168, 511, 168);
+        return;
+    }
+
+    // Displays the current game information.
+    method void drawHUD() {
+        do Output.moveCursor(0, 0);
+        do Output.printString("LIVES: ");
+        do Output.printInt(race.vidas());
+        do Output.printString("   SCORE: ");
+        do Output.printInt(race.puntaje());
+        do Output.printString("   STEP: ");
+        do Output.printInt(race.progreso());
+        do Output.printString("/");
+        do Output.printInt(targetSteps);
+        return;
+    }
+
+    // Returns the screen row for a lane.
+    method int laneRow(int lane) {
+        return (lane * 5) + 2;
+    }
+
+    // Draws the player's car.
+    method void drawCar() {
+        var int row;
+        let row = laneRow(race.carrilCarro());
+        do Grafico.dibujarCelda(row, 2, carSprite);
+        return;
+    }
+
+    // Draws one obstacle according to its type.
+    method void drawObstacle(int type, int lane, int col) {
+        var int row;
+        let row = laneRow(lane);
+
+        if (type = 0) {
+            do Grafico.dibujarCelda(row, col, coneSprite);
+        }
+        if (type = 1) {
+            do Grafico.dibujarCelda(row, col, truckSprite);
+        }
+        if (type = 2) {
+            do Grafico.dibujarCelda(row, col, bikeSprite);
+        }
+        if (type = 3) {
+            do Grafico.dibujarCelda(row, col, coinSprite);
+        }
+        return;
+    }
+
+    // Draws all obstacles currently visible on the screen.
+    method void drawObstacles() {
+        var int lane, col, type;
+        let lane = 0;
+
+        while (lane < 3) {
+            let col = 0;
+            while (col < 32) {
+                let type = race.ocupada(lane, col);
+                if (~(type = -1)) {
+                    do drawObstacle(type, lane, col);
+                }
+                let col = col + 1;
+            }
+            let lane = lane + 1;
+        }
+        return;
+    }
+
+    // Redraws the complete game screen.
+    method void draw() {
+        do Screen.clearScreen();
+        do drawHUD();
+        do drawRoad();
+        do drawObstacles();
+        do drawCar();
+
+        if (paused) {
+            do Output.moveCursor(15, 20);
+            do Output.printString("PAUSED");
+        }
+        return;
+    }
+
+    // Processes keyboard input once per key press.
+    method void processInput() {
+        var int key;
+        let key = Keyboard.keyPressed();
+
+        if (key = 0) {
+            let lastKey = 0;
+            return;
+        }
+
+        if (~(key = lastKey)) {
+            let lastKey = key;
+
+            if (key = 131) {
+                do race.moverCarro(-1);
+            }
+            if (key = 133) {
+                do race.moverCarro(1);
+            }
+            if ((key = 80) | (key = 112)) {
+                let paused = ~paused;
+            }
+            if ((key = 82) | (key = 114)) {
+                do restart();
+            }
+            if (key = 140) {
+                let running = false;
+            }
+        }
+        return;
+    }
+
+    // Restarts the current race.
+    method void restart() {
+        do race.dispose();
+        let race = Carrera.new(targetSteps, 1);
+        let paused = false;
+        let spawnCounter = 0;
+        return;
+    }
+
+    // Displays the final game result.
+    method void showResult() {
+        do Screen.clearScreen();
+        do Output.moveCursor(5, 15);
+
+        if (race.estado() = 2) {
+            do Output.printString("YOU WIN!");
+        } else {
+            do Output.printString("GAME OVER");
+        }
+
+        do Output.moveCursor(8, 12);
+        do Output.printString("FINAL SCORE: ");
+        do Output.printInt(race.puntaje());
+        do Output.moveCursor(12, 9);
+        do Output.printString("PRESS ESC TO EXIT");
+        return;
+    }
+
+    // Runs the complete game loop.
+    method void run() {
+        do showMenu();
+        let race = Carrera.new(targetSteps, 1);
+        let spawnCounter = 0;
+
+        while (running & (race.estado() = 0)) {
+            do processInput();
+
+            if (~paused & running) {
+                let spawnCounter = spawnCounter + 1;
+
+                if (spawnCounter = 5) {
+                    do race.generar();
+                    let spawnCounter = 0;
+                }
+
+                do race.avanzar();
+            }
+
+            do draw();
+            do Sys.wait(100);
+        }
+
+        if (running) {
+            do showResult();
+            do waitForRelease();
+
+            while (~(Keyboard.keyPressed() = 140)) {
+                do Sys.wait(30);
+            }
+        }
+        return;
+    }
+
+    // Releases the race and all sprite arrays.
+    method void dispose() {
+        if (~(race = null)) {
+            do race.dispose();
+        }
+        do Memory.deAlloc(carSprite);
+        do Memory.deAlloc(coneSprite);
+        do Memory.deAlloc(truckSprite);
+        do Memory.deAlloc(bikeSprite);
+        do Memory.deAlloc(coinSprite);
+        do Memory.deAlloc(this);
+        return;
+    }
+}

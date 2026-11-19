@@ -1,0 +1,1589 @@
+function GameUI.new 0
+push constant 11
+call Memory.alloc 1
+pop pointer 0
+push constant 16
+call Array.new 1
+pop this 1
+push constant 16
+call Array.new 1
+pop this 2
+push constant 16
+call Array.new 1
+pop this 3
+push constant 16
+call Array.new 1
+pop this 4
+push constant 16
+call Array.new 1
+pop this 5
+push constant 100
+pop this 6
+push constant 0
+pop this 7
+push constant 0
+pop this 8
+push constant 0
+not
+pop this 9
+push constant 0
+pop this 10
+push pointer 0
+call GameUI.createSprites 1
+pop temp 0
+push pointer 0
+return
+function GameUI.createSprites 0
+push argument 0
+pop pointer 0
+push pointer 0
+call GameUI.createCarSprite 1
+pop temp 0
+push pointer 0
+call GameUI.createConeSprite 1
+pop temp 0
+push pointer 0
+call GameUI.createTruckSprite 1
+pop temp 0
+push pointer 0
+call GameUI.createBikeSprite 1
+pop temp 0
+push pointer 0
+call GameUI.createCoinSprite 1
+pop temp 0
+push constant 0
+return
+function GameUI.clearSprite 1
+push argument 0
+pop pointer 0
+push constant 0
+pop local 0
+label WHILE_EXP0
+push local 0
+push constant 16
+lt
+not
+if-goto WHILE_END0
+push local 0
+push argument 1
+add
+push constant 0
+pop temp 0
+pop pointer 1
+push temp 0
+pop that 0
+push local 0
+push constant 1
+add
+pop local 0
+goto WHILE_EXP0
+label WHILE_END0
+push constant 0
+return
+function GameUI.createCarSprite 0
+push argument 0
+pop pointer 0
+push pointer 0
+push this 1
+call GameUI.clearSprite 2
+pop temp 0
+push constant 1
+push this 1
+add
+push constant 384
+pop temp 0
+pop pointer 1
+push temp 0
+pop that 0
+push constant 2
+push this 1
+add
+push constant 960
+pop temp 0
+pop pointer 1
+push temp 0
+pop that 0
+push constant 3
+push this 1
+add
+push constant 2016
+pop temp 0
+pop pointer 1
+push temp 0
+pop that 0
+push constant 4
+push this 1
+add
+push constant 4080
+pop temp 0
+pop pointer 1
+push temp 0
+pop that 0
+push constant 5
+push this 1
+add
+push constant 8184
+pop temp 0
+pop pointer 1
+push temp 0
+pop that 0
+push constant 6
+push this 1
+add
+push constant 16380
+pop temp 0
+pop pointer 1
+push temp 0
+pop that 0
+push constant 7
+push this 1
+add
+push constant 16380
+pop temp 0
+pop pointer 1
+push temp 0
+pop that 0
+push constant 8
+push this 1
+add
+push constant 16380
+pop temp 0
+pop pointer 1
+push temp 0
+pop that 0
+push constant 9
+push this 1
+add
+push constant 16380
+pop temp 0
+pop pointer 1
+push temp 0
+pop that 0
+push constant 10
+push this 1
+add
+push constant 16380
+pop temp 0
+pop pointer 1
+push temp 0
+pop that 0
+push constant 11
+push this 1
+add
+push constant 8184
+pop temp 0
+pop pointer 1
+push temp 0
+pop that 0
+push constant 12
+push this 1
+add
+push constant 4080
+pop temp 0
+pop pointer 1
+push temp 0
+pop that 0
+push constant 13
+push this 1
+add
+push constant 2016
+pop temp 0
+pop pointer 1
+push temp 0
+pop that 0
+push constant 14
+push this 1
+add
+push constant 960
+pop temp 0
+pop pointer 1
+push temp 0
+pop that 0
+push constant 0
+return
+function GameUI.createConeSprite 0
+push argument 0
+pop pointer 0
+push pointer 0
+push this 2
+call GameUI.clearSprite 2
+pop temp 0
+push constant 2
+push this 2
+add
+push constant 256
+pop temp 0
+pop pointer 1
+push temp 0
+pop that 0
+push constant 3
+push this 2
+add
+push constant 768
+pop temp 0
+pop pointer 1
+push temp 0
+pop that 0
+push constant 4
+push this 2
+add
+push constant 768
+pop temp 0
+pop pointer 1
+push temp 0
+pop that 0
+push constant 5
+push this 2
+add
+push constant 1792
+pop temp 0
+pop pointer 1
+push temp 0
+pop that 0
+push constant 6
+push this 2
+add
+push constant 1792
+pop temp 0
+pop pointer 1
+push temp 0
+pop that 0
+push constant 7
+push this 2
+add
+push constant 3840
+pop temp 0
+pop pointer 1
+push temp 0
+pop that 0
+push constant 8
+push this 2
+add
+push constant 3840
+pop temp 0
+pop pointer 1
+push temp 0
+pop that 0
+push constant 9
+push this 2
+add
+push constant 7936
+pop temp 0
+pop pointer 1
+push temp 0
+pop that 0
+push constant 10
+push this 2
+add
+push constant 7936
+pop temp 0
+pop pointer 1
+push temp 0
+pop that 0
+push constant 11
+push this 2
+add
+push constant 16380
+pop temp 0
+pop pointer 1
+push temp 0
+pop that 0
+push constant 12
+push this 2
+add
+push constant 16380
+pop temp 0
+pop pointer 1
+push temp 0
+pop that 0
+push constant 13
+push this 2
+add
+push constant 32760
+pop temp 0
+pop pointer 1
+push temp 0
+pop that 0
+push constant 14
+push this 2
+add
+push constant 32760
+pop temp 0
+pop pointer 1
+push temp 0
+pop that 0
+push constant 0
+return
+function GameUI.createTruckSprite 0
+push argument 0
+pop pointer 0
+push pointer 0
+push this 3
+call GameUI.clearSprite 2
+pop temp 0
+push constant 1
+push this 3
+add
+push constant 3840
+pop temp 0
+pop pointer 1
+push temp 0
+pop that 0
+push constant 2
+push this 3
+add
+push constant 8184
+pop temp 0
+pop pointer 1
+push temp 0
+pop that 0
+push constant 3
+push this 3
+add
+push constant 16380
+pop temp 0
+pop pointer 1
+push temp 0
+pop that 0
+push constant 4
+push this 3
+add
+push constant 16380
+pop temp 0
+pop pointer 1
+push temp 0
+pop that 0
+push constant 5
+push this 3
+add
+push constant 16380
+pop temp 0
+pop pointer 1
+push temp 0
+pop that 0
+push constant 6
+push this 3
+add
+push constant 16380
+pop temp 0
+pop pointer 1
+push temp 0
+pop that 0
+push constant 7
+push this 3
+add
+push constant 16380
+pop temp 0
+pop pointer 1
+push temp 0
+pop that 0
+push constant 8
+push this 3
+add
+push constant 16380
+pop temp 0
+pop pointer 1
+push temp 0
+pop that 0
+push constant 9
+push this 3
+add
+push constant 16380
+pop temp 0
+pop pointer 1
+push temp 0
+pop that 0
+push constant 10
+push this 3
+add
+push constant 16380
+pop temp 0
+pop pointer 1
+push temp 0
+pop that 0
+push constant 11
+push this 3
+add
+push constant 16380
+pop temp 0
+pop pointer 1
+push temp 0
+pop that 0
+push constant 12
+push this 3
+add
+push constant 16380
+pop temp 0
+pop pointer 1
+push temp 0
+pop that 0
+push constant 13
+push this 3
+add
+push constant 13884
+pop temp 0
+pop pointer 1
+push temp 0
+pop that 0
+push constant 14
+push this 3
+add
+push constant 13884
+pop temp 0
+pop pointer 1
+push temp 0
+pop that 0
+push constant 0
+return
+function GameUI.createBikeSprite 0
+push argument 0
+pop pointer 0
+push pointer 0
+push this 4
+call GameUI.clearSprite 2
+pop temp 0
+push constant 1
+push this 4
+add
+push constant 384
+pop temp 0
+pop pointer 1
+push temp 0
+pop that 0
+push constant 2
+push this 4
+add
+push constant 960
+pop temp 0
+pop pointer 1
+push temp 0
+pop that 0
+push constant 3
+push this 4
+add
+push constant 384
+pop temp 0
+pop pointer 1
+push temp 0
+pop that 0
+push constant 5
+push this 4
+add
+push constant 1536
+pop temp 0
+pop pointer 1
+push temp 0
+pop that 0
+push constant 6
+push this 4
+add
+push constant 3072
+pop temp 0
+pop pointer 1
+push temp 0
+pop that 0
+push constant 7
+push this 4
+add
+push constant 6144
+pop temp 0
+pop pointer 1
+push temp 0
+pop that 0
+push constant 8
+push this 4
+add
+push constant 12288
+pop temp 0
+pop pointer 1
+push temp 0
+pop that 0
+push constant 9
+push this 4
+add
+push constant 6144
+pop temp 0
+pop pointer 1
+push temp 0
+pop that 0
+push constant 10
+push this 4
+add
+push constant 3072
+pop temp 0
+pop pointer 1
+push temp 0
+pop that 0
+push constant 11
+push this 4
+add
+push constant 1536
+pop temp 0
+pop pointer 1
+push temp 0
+pop that 0
+push constant 13
+push this 4
+add
+push constant 384
+pop temp 0
+pop pointer 1
+push temp 0
+pop that 0
+push constant 14
+push this 4
+add
+push constant 960
+pop temp 0
+pop pointer 1
+push temp 0
+pop that 0
+push constant 15
+push this 4
+add
+push constant 384
+pop temp 0
+pop pointer 1
+push temp 0
+pop that 0
+push constant 0
+return
+function GameUI.createCoinSprite 0
+push argument 0
+pop pointer 0
+push pointer 0
+push this 5
+call GameUI.clearSprite 2
+pop temp 0
+push constant 1
+push this 5
+add
+push constant 384
+pop temp 0
+pop pointer 1
+push temp 0
+pop that 0
+push constant 2
+push this 5
+add
+push constant 960
+pop temp 0
+pop pointer 1
+push temp 0
+pop that 0
+push constant 3
+push this 5
+add
+push constant 1632
+pop temp 0
+pop pointer 1
+push temp 0
+pop that 0
+push constant 4
+push this 5
+add
+push constant 3120
+pop temp 0
+pop pointer 1
+push temp 0
+pop that 0
+push constant 5
+push this 5
+add
+push constant 6168
+pop temp 0
+pop pointer 1
+push temp 0
+pop that 0
+push constant 6
+push this 5
+add
+push constant 12300
+pop temp 0
+pop pointer 1
+push temp 0
+pop that 0
+push constant 7
+push this 5
+add
+push constant 12300
+pop temp 0
+pop pointer 1
+push temp 0
+pop that 0
+push constant 8
+push this 5
+add
+push constant 12300
+pop temp 0
+pop pointer 1
+push temp 0
+pop that 0
+push constant 9
+push this 5
+add
+push constant 12300
+pop temp 0
+pop pointer 1
+push temp 0
+pop that 0
+push constant 10
+push this 5
+add
+push constant 6168
+pop temp 0
+pop pointer 1
+push temp 0
+pop that 0
+push constant 11
+push this 5
+add
+push constant 3120
+pop temp 0
+pop pointer 1
+push temp 0
+pop that 0
+push constant 12
+push this 5
+add
+push constant 1632
+pop temp 0
+pop pointer 1
+push temp 0
+pop that 0
+push constant 13
+push this 5
+add
+push constant 960
+pop temp 0
+pop pointer 1
+push temp 0
+pop that 0
+push constant 14
+push this 5
+add
+push constant 384
+pop temp 0
+pop pointer 1
+push temp 0
+pop that 0
+push constant 0
+return
+function GameUI.showMenu 1
+push argument 0
+pop pointer 0
+call Screen.clearScreen 0
+pop temp 0
+push constant 3
+push constant 14
+call Output.moveCursor 2
+pop temp 0
+push constant 17
+call String.new 1
+push constant 69
+call String.appendChar 2
+push constant 65
+call String.appendChar 2
+push constant 70
+call String.appendChar 2
+push constant 73
+call String.appendChar 2
+push constant 84
+call String.appendChar 2
+push constant 32
+call String.appendChar 2
+push constant 82
+call String.appendChar 2
+push constant 65
+call String.appendChar 2
+push constant 67
+call String.appendChar 2
+push constant 73
+call String.appendChar 2
+push constant 78
+call String.appendChar 2
+push constant 71
+call String.appendChar 2
+push constant 32
+call String.appendChar 2
+push constant 71
+call String.appendChar 2
+push constant 65
+call String.appendChar 2
+push constant 77
+call String.appendChar 2
+push constant 69
+call String.appendChar 2
+call Output.printString 1
+pop temp 0
+push constant 6
+push constant 8
+call Output.moveCursor 2
+pop temp 0
+push constant 15
+call String.new 1
+push constant 83
+call String.appendChar 2
+push constant 69
+call String.appendChar 2
+push constant 76
+call String.appendChar 2
+push constant 69
+call String.appendChar 2
+push constant 67
+call String.appendChar 2
+push constant 84
+call String.appendChar 2
+push constant 32
+call String.appendChar 2
+push constant 68
+call String.appendChar 2
+push constant 73
+call String.appendChar 2
+push constant 83
+call String.appendChar 2
+push constant 84
+call String.appendChar 2
+push constant 65
+call String.appendChar 2
+push constant 78
+call String.appendChar 2
+push constant 67
+call String.appendChar 2
+push constant 69
+call String.appendChar 2
+call Output.printString 1
+pop temp 0
+push constant 9
+push constant 8
+call Output.moveCursor 2
+pop temp 0
+push constant 13
+call String.new 1
+push constant 49
+call String.appendChar 2
+push constant 32
+call String.appendChar 2
+push constant 45
+call String.appendChar 2
+push constant 32
+call String.appendChar 2
+push constant 49
+call String.appendChar 2
+push constant 48
+call String.appendChar 2
+push constant 48
+call String.appendChar 2
+push constant 32
+call String.appendChar 2
+push constant 83
+call String.appendChar 2
+push constant 84
+call String.appendChar 2
+push constant 69
+call String.appendChar 2
+push constant 80
+call String.appendChar 2
+push constant 83
+call String.appendChar 2
+call Output.printString 1
+pop temp 0
+push constant 11
+push constant 8
+call Output.moveCursor 2
+pop temp 0
+push constant 13
+call String.new 1
+push constant 50
+call String.appendChar 2
+push constant 32
+call String.appendChar 2
+push constant 45
+call String.appendChar 2
+push constant 32
+call String.appendChar 2
+push constant 50
+call String.appendChar 2
+push constant 48
+call String.appendChar 2
+push constant 48
+call String.appendChar 2
+push constant 32
+call String.appendChar 2
+push constant 83
+call String.appendChar 2
+push constant 84
+call String.appendChar 2
+push constant 69
+call String.appendChar 2
+push constant 80
+call String.appendChar 2
+push constant 83
+call String.appendChar 2
+call Output.printString 1
+pop temp 0
+push constant 13
+push constant 8
+call Output.moveCursor 2
+pop temp 0
+push constant 13
+call String.new 1
+push constant 51
+call String.appendChar 2
+push constant 32
+call String.appendChar 2
+push constant 45
+call String.appendChar 2
+push constant 32
+call String.appendChar 2
+push constant 51
+call String.appendChar 2
+push constant 48
+call String.appendChar 2
+push constant 48
+call String.appendChar 2
+push constant 32
+call String.appendChar 2
+push constant 83
+call String.appendChar 2
+push constant 84
+call String.appendChar 2
+push constant 69
+call String.appendChar 2
+push constant 80
+call String.appendChar 2
+push constant 83
+call String.appendChar 2
+call Output.printString 1
+pop temp 0
+push constant 0
+pop local 0
+label WHILE_EXP0
+push local 0
+push constant 49
+eq
+push local 0
+push constant 50
+eq
+or
+push local 0
+push constant 51
+eq
+or
+not
+not
+if-goto WHILE_END0
+call Keyboard.keyPressed 0
+pop local 0
+push constant 30
+call Sys.wait 1
+pop temp 0
+goto WHILE_EXP0
+label WHILE_END0
+push local 0
+push constant 49
+eq
+if-goto IF_TRUE0
+goto IF_FALSE0
+label IF_TRUE0
+push constant 100
+pop this 6
+label IF_FALSE0
+push local 0
+push constant 50
+eq
+if-goto IF_TRUE1
+goto IF_FALSE1
+label IF_TRUE1
+push constant 200
+pop this 6
+label IF_FALSE1
+push local 0
+push constant 51
+eq
+if-goto IF_TRUE2
+goto IF_FALSE2
+label IF_TRUE2
+push constant 300
+pop this 6
+label IF_FALSE2
+push pointer 0
+call GameUI.waitForRelease 1
+pop temp 0
+push constant 0
+return
+function GameUI.waitForRelease 0
+push argument 0
+pop pointer 0
+label WHILE_EXP0
+call Keyboard.keyPressed 0
+push constant 0
+eq
+not
+not
+if-goto WHILE_END0
+push constant 20
+call Sys.wait 1
+pop temp 0
+goto WHILE_EXP0
+label WHILE_END0
+push constant 0
+return
+function GameUI.drawRoad 0
+push argument 0
+pop pointer 0
+push constant 0
+not
+call Screen.setColor 1
+pop temp 0
+push constant 0
+push constant 88
+push constant 511
+push constant 88
+call Screen.drawLine 4
+pop temp 0
+push constant 0
+push constant 168
+push constant 511
+push constant 168
+call Screen.drawLine 4
+pop temp 0
+push constant 0
+return
+function GameUI.drawHUD 0
+push argument 0
+pop pointer 0
+push constant 0
+push constant 0
+call Output.moveCursor 2
+pop temp 0
+push constant 7
+call String.new 1
+push constant 76
+call String.appendChar 2
+push constant 73
+call String.appendChar 2
+push constant 86
+call String.appendChar 2
+push constant 69
+call String.appendChar 2
+push constant 83
+call String.appendChar 2
+push constant 58
+call String.appendChar 2
+push constant 32
+call String.appendChar 2
+call Output.printString 1
+pop temp 0
+push this 0
+call Carrera.vidas 1
+call Output.printInt 1
+pop temp 0
+push constant 10
+call String.new 1
+push constant 32
+call String.appendChar 2
+push constant 32
+call String.appendChar 2
+push constant 32
+call String.appendChar 2
+push constant 83
+call String.appendChar 2
+push constant 67
+call String.appendChar 2
+push constant 79
+call String.appendChar 2
+push constant 82
+call String.appendChar 2
+push constant 69
+call String.appendChar 2
+push constant 58
+call String.appendChar 2
+push constant 32
+call String.appendChar 2
+call Output.printString 1
+pop temp 0
+push this 0
+call Carrera.puntaje 1
+call Output.printInt 1
+pop temp 0
+push constant 9
+call String.new 1
+push constant 32
+call String.appendChar 2
+push constant 32
+call String.appendChar 2
+push constant 32
+call String.appendChar 2
+push constant 83
+call String.appendChar 2
+push constant 84
+call String.appendChar 2
+push constant 69
+call String.appendChar 2
+push constant 80
+call String.appendChar 2
+push constant 58
+call String.appendChar 2
+push constant 32
+call String.appendChar 2
+call Output.printString 1
+pop temp 0
+push this 0
+call Carrera.progreso 1
+call Output.printInt 1
+pop temp 0
+push constant 1
+call String.new 1
+push constant 47
+call String.appendChar 2
+call Output.printString 1
+pop temp 0
+push this 6
+call Output.printInt 1
+pop temp 0
+push constant 0
+return
+function GameUI.laneRow 0
+push argument 0
+pop pointer 0
+push argument 1
+push constant 5
+call Math.multiply 2
+push constant 2
+add
+return
+function GameUI.drawCar 1
+push argument 0
+pop pointer 0
+push pointer 0
+push this 0
+call Carrera.carrilCarro 1
+call GameUI.laneRow 2
+pop local 0
+push local 0
+push constant 2
+push this 1
+call Grafico.dibujarCelda 3
+pop temp 0
+push constant 0
+return
+function GameUI.drawObstacle 1
+push argument 0
+pop pointer 0
+push pointer 0
+push argument 2
+call GameUI.laneRow 2
+pop local 0
+push argument 1
+push constant 0
+eq
+if-goto IF_TRUE0
+goto IF_FALSE0
+label IF_TRUE0
+push local 0
+push argument 3
+push this 2
+call Grafico.dibujarCelda 3
+pop temp 0
+label IF_FALSE0
+push argument 1
+push constant 1
+eq
+if-goto IF_TRUE1
+goto IF_FALSE1
+label IF_TRUE1
+push local 0
+push argument 3
+push this 3
+call Grafico.dibujarCelda 3
+pop temp 0
+label IF_FALSE1
+push argument 1
+push constant 2
+eq
+if-goto IF_TRUE2
+goto IF_FALSE2
+label IF_TRUE2
+push local 0
+push argument 3
+push this 4
+call Grafico.dibujarCelda 3
+pop temp 0
+label IF_FALSE2
+push argument 1
+push constant 3
+eq
+if-goto IF_TRUE3
+goto IF_FALSE3
+label IF_TRUE3
+push local 0
+push argument 3
+push this 5
+call Grafico.dibujarCelda 3
+pop temp 0
+label IF_FALSE3
+push constant 0
+return
+function GameUI.drawObstacles 3
+push argument 0
+pop pointer 0
+push constant 0
+pop local 0
+label WHILE_EXP0
+push local 0
+push constant 3
+lt
+not
+if-goto WHILE_END0
+push constant 0
+pop local 1
+label WHILE_EXP1
+push local 1
+push constant 32
+lt
+not
+if-goto WHILE_END1
+push this 0
+push local 0
+push local 1
+call Carrera.ocupada 3
+pop local 2
+push local 2
+push constant 1
+neg
+eq
+not
+if-goto IF_TRUE0
+goto IF_FALSE0
+label IF_TRUE0
+push pointer 0
+push local 2
+push local 0
+push local 1
+call GameUI.drawObstacle 4
+pop temp 0
+label IF_FALSE0
+push local 1
+push constant 1
+add
+pop local 1
+goto WHILE_EXP1
+label WHILE_END1
+push local 0
+push constant 1
+add
+pop local 0
+goto WHILE_EXP0
+label WHILE_END0
+push constant 0
+return
+function GameUI.draw 0
+push argument 0
+pop pointer 0
+call Screen.clearScreen 0
+pop temp 0
+push pointer 0
+call GameUI.drawHUD 1
+pop temp 0
+push pointer 0
+call GameUI.drawRoad 1
+pop temp 0
+push pointer 0
+call GameUI.drawObstacles 1
+pop temp 0
+push pointer 0
+call GameUI.drawCar 1
+pop temp 0
+push this 8
+if-goto IF_TRUE0
+goto IF_FALSE0
+label IF_TRUE0
+push constant 15
+push constant 20
+call Output.moveCursor 2
+pop temp 0
+push constant 6
+call String.new 1
+push constant 80
+call String.appendChar 2
+push constant 65
+call String.appendChar 2
+push constant 85
+call String.appendChar 2
+push constant 83
+call String.appendChar 2
+push constant 69
+call String.appendChar 2
+push constant 68
+call String.appendChar 2
+call Output.printString 1
+pop temp 0
+label IF_FALSE0
+push constant 0
+return
+function GameUI.processInput 1
+push argument 0
+pop pointer 0
+call Keyboard.keyPressed 0
+pop local 0
+push local 0
+push constant 0
+eq
+if-goto IF_TRUE0
+goto IF_FALSE0
+label IF_TRUE0
+push constant 0
+pop this 10
+push constant 0
+return
+label IF_FALSE0
+push local 0
+push this 10
+eq
+not
+if-goto IF_TRUE1
+goto IF_FALSE1
+label IF_TRUE1
+push local 0
+pop this 10
+push local 0
+push constant 131
+eq
+if-goto IF_TRUE2
+goto IF_FALSE2
+label IF_TRUE2
+push this 0
+push constant 1
+neg
+call Carrera.moverCarro 2
+pop temp 0
+label IF_FALSE2
+push local 0
+push constant 133
+eq
+if-goto IF_TRUE3
+goto IF_FALSE3
+label IF_TRUE3
+push this 0
+push constant 1
+call Carrera.moverCarro 2
+pop temp 0
+label IF_FALSE3
+push local 0
+push constant 80
+eq
+push local 0
+push constant 112
+eq
+or
+if-goto IF_TRUE4
+goto IF_FALSE4
+label IF_TRUE4
+push this 8
+not
+pop this 8
+label IF_FALSE4
+push local 0
+push constant 82
+eq
+push local 0
+push constant 114
+eq
+or
+if-goto IF_TRUE5
+goto IF_FALSE5
+label IF_TRUE5
+push pointer 0
+call GameUI.restart 1
+pop temp 0
+label IF_FALSE5
+push local 0
+push constant 140
+eq
+if-goto IF_TRUE6
+goto IF_FALSE6
+label IF_TRUE6
+push constant 0
+pop this 9
+label IF_FALSE6
+label IF_FALSE1
+push constant 0
+return
+function GameUI.restart 0
+push argument 0
+pop pointer 0
+push this 0
+call Carrera.dispose 1
+pop temp 0
+push this 6
+push constant 1
+call Carrera.new 2
+pop this 0
+push constant 0
+pop this 8
+push constant 0
+pop this 7
+push constant 0
+return
+function GameUI.showResult 0
+push argument 0
+pop pointer 0
+call Screen.clearScreen 0
+pop temp 0
+push constant 5
+push constant 15
+call Output.moveCursor 2
+pop temp 0
+push this 0
+call Carrera.estado 1
+push constant 2
+eq
+if-goto IF_TRUE0
+goto IF_FALSE0
+label IF_TRUE0
+push constant 8
+call String.new 1
+push constant 89
+call String.appendChar 2
+push constant 79
+call String.appendChar 2
+push constant 85
+call String.appendChar 2
+push constant 32
+call String.appendChar 2
+push constant 87
+call String.appendChar 2
+push constant 73
+call String.appendChar 2
+push constant 78
+call String.appendChar 2
+push constant 33
+call String.appendChar 2
+call Output.printString 1
+pop temp 0
+goto IF_END0
+label IF_FALSE0
+push constant 9
+call String.new 1
+push constant 71
+call String.appendChar 2
+push constant 65
+call String.appendChar 2
+push constant 77
+call String.appendChar 2
+push constant 69
+call String.appendChar 2
+push constant 32
+call String.appendChar 2
+push constant 79
+call String.appendChar 2
+push constant 86
+call String.appendChar 2
+push constant 69
+call String.appendChar 2
+push constant 82
+call String.appendChar 2
+call Output.printString 1
+pop temp 0
+label IF_END0
+push constant 8
+push constant 12
+call Output.moveCursor 2
+pop temp 0
+push constant 13
+call String.new 1
+push constant 70
+call String.appendChar 2
+push constant 73
+call String.appendChar 2
+push constant 78
+call String.appendChar 2
+push constant 65
+call String.appendChar 2
+push constant 76
+call String.appendChar 2
+push constant 32
+call String.appendChar 2
+push constant 83
+call String.appendChar 2
+push constant 67
+call String.appendChar 2
+push constant 79
+call String.appendChar 2
+push constant 82
+call String.appendChar 2
+push constant 69
+call String.appendChar 2
+push constant 58
+call String.appendChar 2
+push constant 32
+call String.appendChar 2
+call Output.printString 1
+pop temp 0
+push this 0
+call Carrera.puntaje 1
+call Output.printInt 1
+pop temp 0
+push constant 12
+push constant 9
+call Output.moveCursor 2
+pop temp 0
+push constant 17
+call String.new 1
+push constant 80
+call String.appendChar 2
+push constant 82
+call String.appendChar 2
+push constant 69
+call String.appendChar 2
+push constant 83
+call String.appendChar 2
+push constant 83
+call String.appendChar 2
+push constant 32
+call String.appendChar 2
+push constant 69
+call String.appendChar 2
+push constant 83
+call String.appendChar 2
+push constant 67
+call String.appendChar 2
+push constant 32
+call String.appendChar 2
+push constant 84
+call String.appendChar 2
+push constant 79
+call String.appendChar 2
+push constant 32
+call String.appendChar 2
+push constant 69
+call String.appendChar 2
+push constant 88
+call String.appendChar 2
+push constant 73
+call String.appendChar 2
+push constant 84
+call String.appendChar 2
+call Output.printString 1
+pop temp 0
+push constant 0
+return
+function GameUI.run 0
+push argument 0
+pop pointer 0
+push pointer 0
+call GameUI.showMenu 1
+pop temp 0
+push this 6
+push constant 1
+call Carrera.new 2
+pop this 0
+push constant 0
+pop this 7
+label WHILE_EXP0
+push this 9
+push this 0
+call Carrera.estado 1
+push constant 0
+eq
+and
+not
+if-goto WHILE_END0
+push pointer 0
+call GameUI.processInput 1
+pop temp 0
+push this 8
+not
+push this 9
+and
+if-goto IF_TRUE0
+goto IF_FALSE0
+label IF_TRUE0
+push this 7
+push constant 1
+add
+pop this 7
+push this 7
+push constant 5
+eq
+if-goto IF_TRUE1
+goto IF_FALSE1
+label IF_TRUE1
+push this 0
+call Carrera.generar 1
+pop temp 0
+push constant 0
+pop this 7
+label IF_FALSE1
+push this 0
+call Carrera.avanzar 1
+pop temp 0
+label IF_FALSE0
+push pointer 0
+call GameUI.draw 1
+pop temp 0
+push constant 100
+call Sys.wait 1
+pop temp 0
+goto WHILE_EXP0
+label WHILE_END0
+push this 9
+if-goto IF_TRUE2
+goto IF_FALSE2
+label IF_TRUE2
+push pointer 0
+call GameUI.showResult 1
+pop temp 0
+push pointer 0
+call GameUI.waitForRelease 1
+pop temp 0
+label WHILE_EXP1
+call Keyboard.keyPressed 0
+push constant 140
+eq
+not
+not
+if-goto WHILE_END1
+push constant 30
+call Sys.wait 1
+pop temp 0
+goto WHILE_EXP1
+label WHILE_END1
+label IF_FALSE2
+push constant 0
+return
+function GameUI.dispose 0
+push argument 0
+pop pointer 0
+push this 0
+push constant 0
+eq
+not
+if-goto IF_TRUE0
+goto IF_FALSE0
+label IF_TRUE0
+push this 0
+call Carrera.dispose 1
+pop temp 0
+label IF_FALSE0
+push this 1
+call Memory.deAlloc 1
+pop temp 0
+push this 2
+call Memory.deAlloc 1
+pop temp 0
+push this 3
+call Memory.deAlloc 1
+pop temp 0
+push this 4
+call Memory.deAlloc 1
+pop temp 0
+push this 5
+call Memory.deAlloc 1
+pop temp 0
+push pointer 0
+call Memory.deAlloc 1
+pop temp 0
+push constant 0
+return

@@ -1,0 +1,13 @@
+class Main {
+
+    function void main() {
+        var GameUI ui;
+
+        let ui = GameUI.new();
+
+        do ui.run();
+        do ui.dispose();
+
+        return;
+    }
+}
