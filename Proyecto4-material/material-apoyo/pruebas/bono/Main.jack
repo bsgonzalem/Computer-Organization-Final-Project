@@ -1,0 +1,94 @@
+// Main.jack - Arnes de prueba del Proyecto 4. NO es parte de la solucion:
+// reemplaza el Main.jack del estudiante solo durante las pruebas.
+// RAM[16382] = caso, RAM[16383] = 1 al terminar, RAM[16300+] = resultados.
+class Main {
+    static int n;
+
+    function void main() {
+        var int caso;
+        let caso = Memory.peek(16382);
+        let n = 0;
+        if (caso = 1) { do Main.caso1(); }
+        if (caso = 2) { do Main.caso2(); }
+        if (caso = 3) { do Main.caso3(); }
+        do Memory.poke(16383, 1);
+        return;
+    }
+
+    function void out(int v) {
+        do Memory.poke(16300 + n, v);
+        let n = n + 1;
+        return;
+    }
+
+    /** Escribe en la salida las 16 palabras de la celda (fila, col). */
+    function void leerCelda(int fila, int col) {
+        var int k, d;
+        let d = 16384 + (fila * 512) + col;
+        let k = 0;
+        while (k < 16) {
+            do Main.out(Memory.peek(d + (k * 32)));
+            let k = k + 1;
+        }
+        return;
+    }
+
+    /** Caso 1: borrarCelda(6, 20) */
+    function void caso1() {
+        var int k;
+        let k = 0;
+        while (k < 16) { do Memory.poke(19476 + (k * 32), 1234 + k); let k = k + 1; }
+        do Memory.poke(19475, 777);
+        do Memory.poke(19477, 777);
+        do Grafico.borrarCelda(6, 20);
+        do Main.leerCelda(6, 20);
+        do Main.out(Memory.peek(19475));
+        do Main.out(Memory.peek(19477));
+        return;
+    }
+
+    /** Caso 2: desplazarFila(6) */
+    function void caso2() {
+        var int k, c;
+        let k = 0;
+        while (k < 16) {
+            let c = 0;
+            while (c < 32) { do Memory.poke(19456 + (k * 32) + c, (k * 100) + c + 1); let c = c + 1; }
+            let k = k + 1;
+        }
+        do Memory.poke(19429, 4321);
+        do Memory.poke(19973, 4321);
+        do Grafico.desplazarFila(6);
+        do Main.out(Memory.peek(19456));
+        do Main.out(Memory.peek(19457));
+        do Main.out(Memory.peek(19486));
+        do Main.out(Memory.peek(19487));
+        do Main.out(Memory.peek(19680));
+        do Main.out(Memory.peek(19681));
+        do Main.out(Memory.peek(19710));
+        do Main.out(Memory.peek(19711));
+        do Main.out(Memory.peek(19936));
+        do Main.out(Memory.peek(19937));
+        do Main.out(Memory.peek(19966));
+        do Main.out(Memory.peek(19967));
+        do Main.out(Memory.peek(19429));
+        do Main.out(Memory.peek(19973));
+        return;
+    }
+
+    /** Caso 3: Aleatorio: semilla 1 y semilla -3 */
+    function void caso3() {
+        do Aleatorio.semilla(1);
+        do Main.out(Aleatorio.siguiente());
+        do Main.out(Aleatorio.siguiente());
+        do Main.out(Aleatorio.siguiente());
+        do Main.out(Aleatorio.siguiente());
+        do Main.out(Aleatorio.siguiente());
+        do Main.out(Aleatorio.siguiente());
+        do Aleatorio.semilla(-3);
+        do Main.out(Aleatorio.siguiente());
+        do Main.out(Aleatorio.siguiente());
+        do Main.out(Aleatorio.siguiente());
+        return;
+    }
+}

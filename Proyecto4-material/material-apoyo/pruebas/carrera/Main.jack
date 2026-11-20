@@ -1,0 +1,416 @@
+// Main.jack - Arnes de prueba del Proyecto 4. NO es parte de la solucion:
+// reemplaza el Main.jack del estudiante solo durante las pruebas.
+// RAM[16382] = caso, RAM[16383] = 1 al terminar, RAM[16300+] = resultados.
+class Main {
+    static int n;
+
+    function void main() {
+        var int caso;
+        let caso = Memory.peek(16382);
+        let n = 0;
+        if (caso = 1) { do Main.caso1(); }
+        if (caso = 2) { do Main.caso2(); }
+        if (caso = 3) { do Main.caso3(); }
+        if (caso = 4) { do Main.caso4(); }
+        if (caso = 5) { do Main.caso5(); }
+        if (caso = 6) { do Main.caso6(); }
+        if (caso = 7) { do Main.caso7(); }
+        if (caso = 8) { do Main.caso8(); }
+        if (caso = 9) { do Main.caso9(); }
+        if (caso = 10) { do Main.caso10(); }
+        if (caso = 11) { do Main.caso11(); }
+        if (caso = 12) { do Main.caso12(); }
+        if (caso = 13) { do Main.caso13(); }
+        if (caso = 14) { do Main.caso14(); }
+        if (caso = 15) { do Main.caso15(); }
+        if (caso = 16) { do Main.caso16(); }
+        if (caso = 17) { do Main.caso17(); }
+        if (caso = 18) { do Main.caso18(); }
+        do Memory.poke(16383, 1);
+        return;
+    }
+
+    function void out(int v) {
+        do Memory.poke(16300 + n, v);
+        let n = n + 1;
+        return;
+    }
+
+    /** true si el carril l tiene un obstaculo letal entre las columnas a y b. */
+    function boolean letalEntre(Carrera c, int l, int a, int b) {
+        var int x, t;
+        let x = a;
+        while (~(x > b)) {
+            let t = c.ocupada(l, x);
+            if ((t > -1) & (t < 3)) { return true; }
+            let x = x + 1;
+        }
+        return false;
+    }
+
+    /** true si los dos carriles distintos de l tienen letal[] en true. */
+    function boolean otrosLetales(Array letal, int l) {
+        var int k, n;
+        let k = 0;
+        let n = 0;
+        while (k < 3) {
+            if ((~(k = l)) & letal[k]) { let n = n + 1; }
+            let k = k + 1;
+        }
+        return n = 2;
+    }
+
+    /** Cantidad de bits en 1 de v (v entre 0 y 15). */
+    function int bits(int v) {
+        var int n;
+        let n = 0;
+        if (v & 1) { let n = n + 1; }
+        if (v & 2) { let n = n + 1; }
+        if (v & 4) { let n = n + 1; }
+        if (v & 8) { let n = n + 1; }
+        return n;
+    }
+
+    /** Caso 1: Estado inicial de una carrera nueva */
+    function void caso1() {
+        var Carrera c;
+        var int i;
+        let c = Carrera.new(100, 1);
+        do Main.out(c.carrilCarro());
+        do Main.out(c.vidas());
+        do Main.out(c.puntaje());
+        do Main.out(c.progreso());
+        do Main.out(c.estado());
+        do Main.out(c.cantidad());
+        do Main.out(c.ocupada(1, 2));
+        return;
+    }
+
+    /** Caso 2: Cambios de carril y limites (no sale de los carriles 0 a 2) */
+    function void caso2() {
+        var Carrera c;
+        var int i;
+        let c = Carrera.new(100, 1);
+        do c.moverCarro(-1);
+        do c.avanzar();
+        do Main.out(c.carrilCarro());
+        do c.moverCarro(-1);
+        do c.avanzar();
+        do Main.out(c.carrilCarro());
+        do c.moverCarro(1);
+        do c.avanzar();
+        do Main.out(c.carrilCarro());
+        do c.moverCarro(1);
+        do c.avanzar();
+        do Main.out(c.carrilCarro());
+        do c.moverCarro(1);
+        do c.avanzar();
+        do Main.out(c.carrilCarro());
+        do Main.out(c.progreso());
+        do Main.out(c.puntaje());
+        return;
+    }
+
+    /** Caso 3: El cambio de carril se aplica en avanzar y vale la ultima solicitud */
+    function void caso3() {
+        var Carrera c;
+        var int i;
+        let c = Carrera.new(100, 1);
+        do c.moverCarro(-1);
+        do Main.out(c.carrilCarro());
+        do c.moverCarro(1);
+        do c.avanzar();
+        do Main.out(c.carrilCarro());
+        do c.moverCarro(5);
+        do c.avanzar();
+        do Main.out(c.carrilCarro());
+        return;
+    }
+
+    /** Caso 4: Un cono avanza una celda por paso */
+    function void caso4() {
+        var Carrera c;
+        var int i;
+        let c = Carrera.new(100, 1);
+        do c.agregarObstaculo(0, 0, 10);
+        do Main.out(c.ocupada(0, 10));
+        do Main.out(c.ocupada(0, 9));
+        do Main.out(c.ocupada(1, 10));
+        do Main.out(c.cantidad());
+        do c.avanzar();
+        do Main.out(c.ocupada(0, 9));
+        do Main.out(c.ocupada(0, 10));
+        return;
+    }
+
+    /** Caso 5: Un camion ocupa tres celdas; las celdas fuera de pantalla no cuentan */
+    function void caso5() {
+        var Carrera c;
+        var int i;
+        let c = Carrera.new(100, 1);
+        do c.agregarObstaculo(1, 2, 20);
+        do Main.out(c.ocupada(2, 19));
+        do Main.out(c.ocupada(2, 20));
+        do Main.out(c.ocupada(2, 22));
+        do Main.out(c.ocupada(2, 23));
+        do c.avanzar();
+        do Main.out(c.ocupada(2, 19));
+        do Main.out(c.ocupada(2, 22));
+        do c.agregarObstaculo(1, 0, 31);
+        do Main.out(c.ocupada(0, 31));
+        do Main.out(c.ocupada(0, 32));
+        do Main.out(c.cantidad());
+        return;
+    }
+
+    /** Caso 6: Una moto avanza dos celdas por paso */
+    function void caso6() {
+        var Carrera c;
+        var int i;
+        let c = Carrera.new(100, 1);
+        do c.agregarObstaculo(2, 0, 20);
+        do c.avanzar();
+        do Main.out(c.ocupada(0, 18));
+        do Main.out(c.ocupada(0, 19));
+        do Main.out(c.ocupada(0, 20));
+        return;
+    }
+
+    /** Caso 7: Choque con un cono: pierde una vida y el cono desaparece */
+    function void caso7() {
+        var Carrera c;
+        var int i;
+        let c = Carrera.new(100, 1);
+        do c.agregarObstaculo(0, 1, 3);
+        do c.avanzar();
+        do Main.out(c.vidas());
+        do Main.out(c.cantidad());
+        do Main.out(c.puntaje());
+        do Main.out(c.progreso());
+        do Main.out(c.estado());
+        do Main.out(c.ocupada(1, 2));
+        return;
+    }
+
+    /** Caso 8: Una moto que salta sobre el carro tambien choca */
+    function void caso8() {
+        var Carrera c;
+        var int i;
+        let c = Carrera.new(100, 1);
+        do c.agregarObstaculo(2, 1, 3);
+        do c.avanzar();
+        do Main.out(c.vidas());
+        do Main.out(c.cantidad());
+        return;
+    }
+
+    /** Caso 9: Cambiar de carril hacia un obstaculo produce choque */
+    function void caso9() {
+        var Carrera c;
+        var int i;
+        let c = Carrera.new(100, 1);
+        do c.agregarObstaculo(0, 0, 3);
+        do c.moverCarro(-1);
+        do c.avanzar();
+        do Main.out(c.carrilCarro());
+        do Main.out(c.vidas());
+        return;
+    }
+
+    /** Caso 10: Cambiar de carril a tiempo esquiva el obstaculo */
+    function void caso10() {
+        var Carrera c;
+        var int i;
+        let c = Carrera.new(100, 1);
+        do c.agregarObstaculo(0, 1, 3);
+        do c.moverCarro(1);
+        do c.avanzar();
+        do Main.out(c.carrilCarro());
+        do Main.out(c.vidas());
+        do Main.out(c.cantidad());
+        do Main.out(c.ocupada(1, 2));
+        return;
+    }
+
+    /** Caso 11: Una moneda suma 10 puntos y no quita vidas */
+    function void caso11() {
+        var Carrera c;
+        var int i;
+        let c = Carrera.new(100, 1);
+        do c.agregarObstaculo(3, 1, 3);
+        do c.avanzar();
+        do Main.out(c.puntaje());
+        do Main.out(c.vidas());
+        do Main.out(c.cantidad());
+        return;
+    }
+
+    /** Caso 12: Los obstaculos que salen por la izquierda se eliminan */
+    function void caso12() {
+        var Carrera c;
+        var int i;
+        let c = Carrera.new(100, 1);
+        do c.agregarObstaculo(0, 0, 1);
+        do c.avanzar();
+        do Main.out(c.cantidad());
+        do c.avanzar();
+        do Main.out(c.cantidad());
+        do c.agregarObstaculo(1, 2, 1);
+        do c.avanzar();
+        do Main.out(c.cantidad());
+        do c.avanzar();
+        do Main.out(c.cantidad());
+        do c.avanzar();
+        do Main.out(c.cantidad());
+        do c.avanzar();
+        do Main.out(c.cantidad());
+        return;
+    }
+
+    /** Caso 13: Derrota al perder la tercera vida; despues nada cambia */
+    function void caso13() {
+        var Carrera c;
+        var int i;
+        let c = Carrera.new(100, 1);
+        do c.agregarObstaculo(0, 1, 3);
+        do c.agregarObstaculo(0, 1, 4);
+        do c.agregarObstaculo(0, 1, 5);
+        let i = 0; while (i < 3) { do c.avanzar(); let i = i + 1; }
+        do Main.out(c.vidas());
+        do Main.out(c.estado());
+        do Main.out(c.progreso());
+        do Main.out(c.puntaje());
+        do Main.out(c.cantidad());
+        do c.avanzar();
+        do c.moverCarro(-1);
+        do c.avanzar();
+        do Main.out(c.progreso());
+        do Main.out(c.carrilCarro());
+        return;
+    }
+
+    /** Caso 14: Victoria al llegar a la meta; despues nada cambia */
+    function void caso14() {
+        var Carrera c;
+        var int i;
+        let c = Carrera.new(5, 1);
+        let i = 0; while (i < 5) { do c.avanzar(); let i = i + 1; }
+        do Main.out(c.estado());
+        do Main.out(c.progreso());
+        do Main.out(c.puntaje());
+        do c.agregarObstaculo(0, 1, 3);
+        let i = 0; while (i < 2) { do c.avanzar(); let i = i + 1; }
+        do Main.out(c.progreso());
+        do Main.out(c.vidas());
+        return;
+    }
+
+    /** Caso 15: Dos choques en el mismo paso */
+    function void caso15() {
+        var Carrera c;
+        var int i;
+        let c = Carrera.new(100, 1);
+        do c.agregarObstaculo(0, 1, 3);
+        do c.agregarObstaculo(2, 1, 4);
+        do c.avanzar();
+        do Main.out(c.vidas());
+        do Main.out(c.cantidad());
+        return;
+    }
+
+    /** Caso 16: La parte trasera de un camion tambien choca */
+    function void caso16() {
+        var Carrera c;
+        var int i;
+        let c = Carrera.new(100, 1);
+        do c.agregarObstaculo(1, 1, 4);
+        do c.avanzar();
+        do Main.out(c.vidas());
+        do c.avanzar();
+        do Main.out(c.vidas());
+        do Main.out(c.cantidad());
+        return;
+    }
+
+    /** Caso 17: Generacion: 300 pasos; regla de paso libre, uno por paso, 3 carriles, 3 tipos */
+    function void caso17() {
+        var Carrera c;
+        var int paso, semilla, agregados, fallas, masDeUno, carriles, tipos, n1, l, t;
+        var Array antes, letal;
+        let antes = Array.new(3);
+        let letal = Array.new(3);
+        let semilla = 7;
+        let c = Carrera.new(1000, semilla);
+        let paso = 0;
+        while (paso < 300) {
+            if (~(c.estado() = 0)) {
+                let semilla = semilla + 13;
+                let c = Carrera.new(1000, semilla);
+            }
+            do c.avanzar();
+            let l = 0;
+            while (l < 3) {
+                let antes[l] = c.ocupada(l, 31);
+                let letal[l] = Main.letalEntre(c, l, 26, 31);
+                let l = l + 1;
+            }
+            let n1 = c.cantidad();
+            do c.generar();
+            if (c.cantidad() > (n1 + 1)) { let masDeUno = masDeUno + 1; }
+            if (c.cantidad() > n1) {
+                let agregados = agregados + 1;
+                let l = 0;
+                while (l < 3) {
+                    let t = c.ocupada(l, 31);
+                    if ((antes[l] = -1) & (t > -1)) {
+                        if ((t < 3) & Main.otrosLetales(letal, l)) { let fallas = fallas + 1; }
+                        if (l = 0) { let carriles = carriles | 1; }
+                        if (l = 1) { let carriles = carriles | 2; }
+                        if (l = 2) { let carriles = carriles | 4; }
+                        if (t = 0) { let tipos = tipos | 1; }
+                        if (t = 1) { let tipos = tipos | 2; }
+                        if (t = 2) { let tipos = tipos | 4; }
+                        if (t = 3) { let tipos = tipos | 8; }
+                    }
+                    let l = l + 1;
+                }
+            }
+            let paso = paso + 1;
+        }
+        do Main.out(fallas);
+        do Main.out(masDeUno);
+        do Main.out(agregados > 29);
+        do Main.out(carriles);
+        do Main.out(Main.bits(tipos) > 2);
+        return;
+    }
+
+    /** Caso 18: Fugas de memoria: con el heap casi lleno, 800 obstaculos y 120 carreras se liberan */
+    function void caso18() {
+        var Carrera c, c2;
+        var int i, k;
+        var Array relleno;
+        let relleno = Array.new(9500);
+        let c = Carrera.new(30000, 3);
+        let i = 0;
+        while (i < 80) {
+            let k = 0;
+            while (k < 10) { do c.agregarObstaculo(0, 0, 0); let k = k + 1; }
+            do c.avanzar();
+            let i = i + 1;
+        }
+        do Main.out(c.cantidad());
+        do Main.out(c.vidas());
+        let i = 0;
+        while (i < 120) {
+            let c2 = Carrera.new(10, i);
+            let k = 0;
+            while (k < 5) { do c2.agregarObstaculo(k - ((k / 4) * 4), 0, 10 + k); let k = k + 1; }
+            do c2.avanzar();
+            do c2.dispose();
+            let i = i + 1;
+        }
+        do Main.out(1);
+        return;
+    }
+}

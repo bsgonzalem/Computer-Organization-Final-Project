@@ -1,0 +1,187 @@
+// Main.jack - Arnes de prueba del Proyecto 4. NO es parte de la solucion:
+// reemplaza el Main.jack del estudiante solo durante las pruebas.
+// RAM[16382] = caso, RAM[16383] = 1 al terminar, RAM[16300+] = resultados.
+class Main {
+    static int n;
+
+    function void main() {
+        var int caso;
+        let caso = Memory.peek(16382);
+        let n = 0;
+        if (caso = 1) { do Main.caso1(); }
+        if (caso = 2) { do Main.caso2(); }
+        if (caso = 3) { do Main.caso3(); }
+        do Memory.poke(16383, 1);
+        return;
+    }
+
+    function void out(int v) {
+        do Memory.poke(16300 + n, v);
+        let n = n + 1;
+        return;
+    }
+
+    /** Escribe en la salida las 16 palabras de la celda (fila, col). */
+    function void leerCelda(int fila, int col) {
+        var int k, d;
+        let d = 16384 + (fila * 512) + col;
+        let k = 0;
+        while (k < 16) {
+            do Main.out(Memory.peek(d + (k * 32)));
+            let k = k + 1;
+        }
+        return;
+    }
+
+    /** Caso 1: Celda (0, 0): esquina superior izquierda */
+    function void caso1() {
+        var Array a, b;
+        var int x, y;
+        let a = Array.new(16);
+        let a[0] = -1;
+        let a[1] = -32767 - 1;
+        let a[2] = 2007;
+        let a[3] = 3007;
+        let a[4] = 4007;
+        let a[5] = 5007;
+        let a[6] = 6007;
+        let a[7] = 7007;
+        let a[8] = 8007;
+        let a[9] = 9007;
+        let a[10] = 10007;
+        let a[11] = 11007;
+        let a[12] = 12007;
+        let a[13] = 13007;
+        let a[14] = 14007;
+        let a[15] = 15007;
+        let b = Array.new(16);
+        let b[0] = 1;
+        let b[1] = 2048;
+        let b[2] = 4095;
+        let b[3] = 6142;
+        let b[4] = 8189;
+        let b[5] = 10236;
+        let b[6] = 12283;
+        let b[7] = 14330;
+        let b[8] = 16377;
+        let b[9] = 18424;
+        let b[10] = 20471;
+        let b[11] = 22518;
+        let b[12] = 24565;
+        let b[13] = 26612;
+        let b[14] = 28659;
+        let b[15] = 706;
+        let x = 111;
+        let y = 222;
+        do Grafico.dibujarCelda(0, 0, a);
+        do Main.leerCelda(0, 0);
+        do Main.out(Memory.peek(16385));
+        do Main.out(Memory.peek(16896));
+        do Main.out(x);
+        do Main.out(y);
+        do Main.out(a[5]);
+        return;
+    }
+
+    /** Caso 2: Celda (15, 31): esquina inferior derecha */
+    function void caso2() {
+        var Array a, b;
+        var int x, y;
+        let a = Array.new(16);
+        let a[0] = -1;
+        let a[1] = -32767 - 1;
+        let a[2] = 2007;
+        let a[3] = 3007;
+        let a[4] = 4007;
+        let a[5] = 5007;
+        let a[6] = 6007;
+        let a[7] = 7007;
+        let a[8] = 8007;
+        let a[9] = 9007;
+        let a[10] = 10007;
+        let a[11] = 11007;
+        let a[12] = 12007;
+        let a[13] = 13007;
+        let a[14] = 14007;
+        let a[15] = 15007;
+        let b = Array.new(16);
+        let b[0] = 1;
+        let b[1] = 2048;
+        let b[2] = 4095;
+        let b[3] = 6142;
+        let b[4] = 8189;
+        let b[5] = 10236;
+        let b[6] = 12283;
+        let b[7] = 14330;
+        let b[8] = 16377;
+        let b[9] = 18424;
+        let b[10] = 20471;
+        let b[11] = 22518;
+        let b[12] = 24565;
+        let b[13] = 26612;
+        let b[14] = 28659;
+        let b[15] = 706;
+        let x = 111;
+        let y = 222;
+        do Grafico.dibujarCelda(15, 31, a);
+        do Main.leerCelda(15, 31);
+        do Main.out(Memory.peek(24094));
+        do Main.out(Memory.peek(23583));
+        do Main.out(x);
+        do Main.out(y);
+        do Main.out(a[5]);
+        return;
+    }
+
+    /** Caso 3: Celda (7, 12): celda central */
+    function void caso3() {
+        var Array a, b;
+        var int x, y;
+        let a = Array.new(16);
+        let a[0] = -1;
+        let a[1] = -32767 - 1;
+        let a[2] = 2007;
+        let a[3] = 3007;
+        let a[4] = 4007;
+        let a[5] = 5007;
+        let a[6] = 6007;
+        let a[7] = 7007;
+        let a[8] = 8007;
+        let a[9] = 9007;
+        let a[10] = 10007;
+        let a[11] = 11007;
+        let a[12] = 12007;
+        let a[13] = 13007;
+        let a[14] = 14007;
+        let a[15] = 15007;
+        let b = Array.new(16);
+        let b[0] = 1;
+        let b[1] = 2048;
+        let b[2] = 4095;
+        let b[3] = 6142;
+        let b[4] = 8189;
+        let b[5] = 10236;
+        let b[6] = 12283;
+        let b[7] = 14330;
+        let b[8] = 16377;
+        let b[9] = 18424;
+        let b[10] = 20471;
+        let b[11] = 22518;
+        let b[12] = 24565;
+        let b[13] = 26612;
+        let b[14] = 28659;
+        let b[15] = 706;
+        let x = 111;
+        let y = 222;
+        do Grafico.dibujarCelda(7, 12, a);
+        do Main.leerCelda(7, 12);
+        do Main.out(Memory.peek(19979));
+        do Main.out(Memory.peek(19981));
+        do Main.out(Memory.peek(19468));
+        do Main.out(Memory.peek(20492));
+        do Main.out(x);
+        do Main.out(y);
+        do Main.out(a[5]);
+        return;
+    }
+}
